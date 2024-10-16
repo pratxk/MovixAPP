@@ -16,16 +16,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { genres } from "./Trending/genres";
 import CircularProgress from "./Progress_Bars/CircularProgress";
 import noImage from '../assets/notAvailable.png';
 import CircleProgress from "./Progress_Bars/CircularProgress";
 
-const Slider = ({ type, url='' }) => {
+const Slider = ({ type, url = '' }) => {
     const baseUrl = 'https://image.tmdb.org/t/p/original/';
     const swiperRef = useRef(null);
-    
+
 
     const handlePrev = () => {
         if (swiperRef.current) {
@@ -67,7 +67,7 @@ const Slider = ({ type, url='' }) => {
             >
                 {type.map((i) => (
                     <SwiperSlide key={i.id}>
-                        <Link to={url+i.id}>
+                        <Link to={url + i.id}>
                             <Square m="auto" position='relative'>
                                 <Image
                                     src={i.poster_path ? `${baseUrl + i.poster_path}` : noImage}
@@ -75,6 +75,8 @@ const Slider = ({ type, url='' }) => {
                                     boxSize={{ base: "100px" }}
                                     borderRadius='3%'
                                     w="100%"
+                                    transition="transform 0.3s ease"
+                                    _hover={{ transform: 'scale(1.05)' }}
                                     h='300px'
                                 />
                                 <Flex pos='absolute' bottom='15px' bg='transparent' right='20px' gap='5px'>
@@ -83,9 +85,9 @@ const Slider = ({ type, url='' }) => {
                                         return <Badge fontWeight='bold' fontSize={'10px'} key={ele} bg='hotpink' color='white'>{genreName}</Badge>;
                                     })}
                                 </Flex>
-                            <Box pos='absolute' bottom='-5' left='0' borderRadius='100%'>
-                                <CircleProgress value={i.vote_average} />
-                            </Box>
+                                <Box pos='absolute' bottom='-5' left='0' borderRadius='100%'>
+                                    <CircleProgress value={i.vote_average} />
+                                </Box>
                             </Square>
                         </Link>
                         <VStack pl={1} mt={3} textAlign='left' align="left">
@@ -96,7 +98,7 @@ const Slider = ({ type, url='' }) => {
                                 fontSize="16px"
                                 color='white'
                             >
-                                {i.original_title !== undefined ?  i.original_title : i.original_name}
+                                {i.original_title !== undefined ? i.original_title : i.original_name}
                             </Text>
                             <Text
                                 pb={5}
