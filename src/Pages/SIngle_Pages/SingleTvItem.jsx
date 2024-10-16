@@ -58,7 +58,7 @@ const SingleTvItem = () => {
                             ))}
                         </Flex>
                         <Flex spacing={4} alignItems="center" gap={2}>
-                            <CircleProgress value={seriesData.vote_average} /> {/* Assuming value is out of 10 */}
+                            <CircleProgress value={seriesData.vote_average} />
                             <Button leftIcon={<Icon as={FaPlay} />} colorScheme="pink" variant="solid" size="md" boxShadow="lg" onClick={() => window.open(seriesData.homepage, "_blank")}>
                                 Watch Trailer
                             </Button>
@@ -83,8 +83,14 @@ const SingleTvItem = () => {
                         </Flex>
                         <Box>
                             <Text fontSize="xs" fontWeight="bold" color="gray.400">Creator:</Text>
-                            <Text fontSize="sm">{seriesData.created_by.length > 0 ? seriesData.created_by[0].name : "Unknown"}</Text>
+                            <Text fontSize="sm">{seriesData.created_by.length > 0 ? seriesData.created_by.map(creator => creator.name).join(', ') : "Unknown"}</Text>
                         </Box>
+                        {/* Optional: Display writers if available */}
+                        {/* Uncomment and adjust if your API provides writers data */}
+                        {/* <Box>
+                            <Text fontSize="xs" fontWeight="bold" color="gray.400">Writers:</Text>
+                            <Text fontSize="sm">{writers.length > 0 ? writers.map(writer => writer.name).join(', ') : "Unknown"}</Text>
+                        </Box> */}
                     </VStack>
                 </Flex>
 

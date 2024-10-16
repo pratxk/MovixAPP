@@ -14,16 +14,18 @@ const SingleItem = () => {
   const { singleMovie, castData } = useLoaderData();
   const baseURL = 'https://image.tmdb.org/t/p/original';
 
+  // Find the director and writers from the crew data
+  const director = castData.crew.find(person => person.job === 'Director');
+  const writers = castData.crew.filter(person => person.job === 'Writer');
+
   return (
     <Box position="relative" width="99vw">
       {/* Backdrop Section */}
       <Box
-        filter="brightness(0.8)"
-        bgPosition="center" 
-        
-        bgImage={`url(${baseURL}${singleMovie.backdrop_path})`} 
+        filter="brightness(0.7) contrast(0.9) blur(2px)"
+        bgImage={`url(${baseURL}${singleMovie.backdrop_path})`}
         bgRepeat="no-repeat"
-        bgSize="cover" // Ensures the image covers the full width and height without zooming
+        bgSize="cover"
         width="99vw"
         height="100vh"
         position="absolute"
@@ -31,7 +33,6 @@ const SingleItem = () => {
         left="0"
         zIndex="0"
       />
-
       <Container maxW="container.xl" py={8} zIndex="1" color="white">
         {/* Movie Details Section */}
         <Flex direction={{ base: 'column', md: 'row' }} bg="rgba(0, 0, 0, 0.8)" borderRadius="lg" overflow="hidden"
@@ -90,18 +91,20 @@ const SingleItem = () => {
             </Flex>
             <Box>
               <Text fontSize="xs" fontWeight="bold" color="gray.400">Director:</Text>
-              <Text fontSize="sm">''</Text>
+              <Text fontSize="sm">{director ? director.name : 'N/A'}</Text>
             </Box>
             <Box>
               <Text fontSize="xs" fontWeight="bold" color="gray.400">Writer:</Text>
-              <Text fontSize="sm">Zach Baylin, Will Schneider</Text>
+              <Text fontSize="sm">
+                {writers.length > 0 ? writers.map(writer => writer.name).join(', ') : 'N/A'}
+              </Text>
             </Box>
           </VStack>
         </Flex>
 
         {/* Cast Section */}
         <Box mt='160px'>
-          <Heading size="lg" mb={4} color="white">Caste</Heading>
+          <Heading size="lg" mb={4} color="white">Cast</Heading>
           <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 5 }} spacing={6} py={4}>
             {castData.cast.map((cast) => (
               <VStack

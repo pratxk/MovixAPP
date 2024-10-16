@@ -9,7 +9,7 @@ const SearchCard = ({ item }) => {
     return (
         <>
             <Box>
-                <Link to={''}>
+                <Link to={item.media_type==='movie' ? `/movies/${item.id}` :  item.media_type==='tv' ? `/tvshows/${item.id}` : ``}>
                     <Square m="auto" position='relative'>
                         <Image
                             src={item.poster_path || item.profile_path ? `${baseUrl}${item.poster_path || item.profile_path}` : noImage}

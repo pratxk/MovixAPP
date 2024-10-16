@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 const Navbar = () => {
   return (
     <>
-      <Box as='nav' display='flex' justifyContent='space-between' px='13em' h='60px' alignItems='center' bg='#010d21' >
+      <Box as='nav' display='flex' justifyContent='space-between'  px='13em' h='60px' alignItems='center' bg='#010d21' >
         <Box  display='flex' alignItems='center'>
           <Link to='/'>
             <Image w='100%' h='60px'bg='#010d21' src='https://movix-app-murex.vercel.app/assets/movix-logo-HTlvmwAF.svg'/>
